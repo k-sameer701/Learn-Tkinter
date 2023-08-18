@@ -13,7 +13,8 @@ my_image_5 = ImageTk.PhotoImage(Image.open('D:\CodingStuff\Learn Tinter\Image_Ut
 
 image_list = [my_image_1, my_image_2, my_image_3, my_image_4, my_image_5]
 
-status = Label(root, text='Image 1 of 5')
+status = Label(root, text='Image 1 of ' + str(len(image_list)), bd=1, relief=SUNKEN, anchor=E)
+status.grid(row=2, column=0, columnspan=3, sticky=W+E)
 
 my_label = Label(image=my_image_1)
 my_label.grid(row=0, column=0, columnspan=3)
@@ -36,6 +37,10 @@ def forward(image_number):
     button_backward.grid(row=1, column=0)   
     button_forward.grid(row=1, column=2)
     
+    # UPDATE STATUS BAR
+    
+    status = Label(root, text='Image '+str(image_number)+' of ' + str(len(image_list)), bd=1, relief=SUNKEN, anchor=E)
+    status.grid(row=2, column=0, columnspan=3, sticky=W+E)
     
 
 def backward(image_number):
@@ -55,12 +60,17 @@ def backward(image_number):
     button_backward.grid(row=1, column=0)   
     button_forward.grid(row=1, column=2)
 
+    # UPDATE STATUS BAR
+
+    status = Label(root, text='Image '+str(image_number)+' of ' + str(len(image_list)), bd=1, relief=SUNKEN, anchor=E)
+    status.grid(row=2, column=0, columnspan=3, sticky=W+E)
+
 button_backward = Button(root, text='<<', command= lambda : backward(), state=DISABLED)
 button_exit = Button(root, text='Exit', command = root.quit)
 button_forward = Button(root, text='>>', command= lambda: forward(2))
 
 button_backward.grid(row=1, column=0)
 button_exit.grid(row=1, column=1)
-button_forward.grid(row=1, column=2)
+button_forward.grid(row=1, column=2, pady=10)
 
 root.mainloop()
